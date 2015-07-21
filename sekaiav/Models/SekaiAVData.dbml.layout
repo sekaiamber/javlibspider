@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="SekaiAVData">
+  <DataContextMoniker Name="/SekaiAVDataDataContext" />
+  <nestedChildShapes>
+    <classShape Id="2078e154-3506-4255-8ff2-5cc554074913" absoluteBounds="5, 0.5, 2, 1.1895064290364583">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/t_actress_video" />
+      <nestedChildShapes>
+        <elementListCompartment Id="55b0a5e0-eece-4616-95ab-890a7a0aaaed" absoluteBounds="5.015, 0.96, 1.9700000000000002, 0.62950642903645826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4dd218e6-a8c0-4803-ab46-c5cb3c8f6411" absoluteBounds="5, 1.875, 2, 1.1895064290364583">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/t_factory_video" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dd9af19a-047b-4242-be28-aefa8a024735" absoluteBounds="5.015, 2.335, 1.9700000000000002, 0.62950642903645826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="edcd4a1a-3b32-4ebb-89eb-84cfebe276e0" absoluteBounds="5, 3.25, 2, 1.1895064290364583">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/t_issuer_video" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d3169dff-0b63-4f88-b1fc-f0f845111a5f" absoluteBounds="5.015, 3.71, 1.9700000000000002, 0.62950642903645826" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d1a3e974-2f71-460e-b652-1621b8d0a8b8" absoluteBounds="2.75, 3.5, 2, 3.8637821451822916">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/v_video" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d948428a-1a2a-4f11-9090-39845ac8b7cd" absoluteBounds="2.765, 3.96, 1.9700000000000002, 3.3037821451822915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="033eb122-6af8-4f90-b62e-f6098d2e8c59" absoluteBounds="0.5, 0.5, 2, 1.9535852050781251">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/t_actress" />
+      <nestedChildShapes>
+        <elementListCompartment Id="972fe9dd-499e-4833-898d-085a922888eb" absoluteBounds="0.515, 0.96, 1.9700000000000002, 1.393585205078125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="bd413de4-022f-4338-ae54-2ace0f1ad31d" absoluteBounds="0.5, 2.625, 2, 1.5715458170572916">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/t_director" />
+      <nestedChildShapes>
+        <elementListCompartment Id="19147710-08a1-4014-972c-431a8c9dba71" absoluteBounds="0.51500000000000012, 3.085, 1.9700000000000002, 1.0115458170572915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="17a20985-7f75-4e46-8d00-80c0dce49dba" absoluteBounds="0.5, 4.5, 2, 1.5715458170572916">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/t_factory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0135aa81-72fd-4673-8d37-44d8ac1731a7" absoluteBounds="0.51500000000000012, 4.96, 1.9700000000000002, 1.0115458170572915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="383a8e0e-bbde-41bd-b276-0ad2ac0d2c77" absoluteBounds="0.5, 6.25, 2, 1.5715458170572916">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/t_issuer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="27672a1c-0ea2-4dbf-b31e-9e5d44ae9862" absoluteBounds="0.51500000000000012, 6.71, 1.9700000000000002, 1.0115458170572915" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ce982ba5-b10f-49ba-9639-9d9830a51734" absoluteBounds="2.75, 0.5, 2, 2.9086836751302081">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/t_video" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c285c39e-530e-4e50-8770-8b48d9ccda6c" absoluteBounds="2.765, 0.96, 1.9700000000000002, 2.348683675130208" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

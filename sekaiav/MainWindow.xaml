@@ -1,0 +1,10 @@
+﻿<Window x:Class="sekaiav.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="抓取女忧" Height="23" HorizontalAlignment="Left" Margin="20,12,0,0" Name="bt_catch_actress" VerticalAlignment="Top" Width="75" Click="bt_catch_actress_Click" />
+        <TextBox Height="258" HorizontalAlignment="Left" Margin="20,41,0,0" Name="tb_msg" VerticalAlignment="Top" Width="471" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
+        <Button Content="抓取影片" Height="23" HorizontalAlignment="Left" Margin="101,12,0,0" Name="bt_catch_video" VerticalAlignment="Top" Width="75" Click="bt_catch_video_Click" />
+    </Grid>
+</Window>

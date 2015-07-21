@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="sekai_av" Class="SekaiAVDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=sekai_av;Persist Security Info=True;User ID=sa" SettingsObjectName="sekaiav.Properties.Settings" SettingsPropertyName="sekai_avConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.t_actress_video" Member="t_actress_video">
+    <Type Name="t_actress_video">
+      <Column Name="f_actress" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="f_video" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_factory_video" Member="t_factory_video">
+    <Type Name="t_factory_video">
+      <Column Name="f_factory" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="f_video" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_issuer_video" Member="t_issuer_video">
+    <Type Name="t_issuer_video">
+      <Column Name="t_issuer" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="t_video" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.v_video" Member="v_video">
+    <Type Name="v_video">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="f_javlib_id" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_length" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="f_issuer_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="f_code" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="f_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="f_director_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="f_issuer_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="f_director_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="f_director_javlib_id" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="f_issuer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="f_issuer_javlib_id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="f_factory_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="f_factory_javlib_id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="f_factory_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_actress" Member="t_actress">
+    <Type Name="t_actress">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="f_javlib_id" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="f_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="f_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="f_prefix" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="f_version" Type="System.String" DbType="NChar(32) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_director" Member="t_director">
+    <Type Name="t_director">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="f_javlib_id" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="f_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_factory" Member="t_factory">
+    <Type Name="t_factory">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="f_javlib_id" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="f_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_issuer" Member="t_issuer">
+    <Type Name="t_issuer">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="f_javlib_id" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="f_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_video" Member="t_video">
+    <Type Name="t_video">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="f_javlib_id" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_director" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="f_length" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="f_issuer_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="f_issuer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="f_code" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="f_factory" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="f_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="f_version" Type="System.String" DbType="NChar(32) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>

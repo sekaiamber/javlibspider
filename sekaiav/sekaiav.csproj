@@ -59,6 +59,7 @@
     <Compile Include="Actions\CatchVideo.cs" />
     <Compile Include="Utils\Config.cs" />
     <Compile Include="Utils\HttpHandler.cs" />
+    <Compile Include="Utils\LogHandler.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

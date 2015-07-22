@@ -56,5 +56,11 @@
         <elementListCompartment Id="c285c39e-530e-4e50-8770-8b48d9ccda6c" absoluteBounds="2.765, 0.96, 1.9700000000000002, 2.348683675130208" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="e697414e-7fb4-45dc-b99a-087b82e5a5e2" absoluteBounds="5, 4.625, 2, 2.1446048990885416">
+      <DataClassMoniker Name="/SekaiAVDataDataContext/t_log" />
+      <nestedChildShapes>
+        <elementListCompartment Id="68c8cb94-8d3f-404a-9721-e27b359a95ee" absoluteBounds="5.015, 5.085, 1.9700000000000002, 1.5846048990885415" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

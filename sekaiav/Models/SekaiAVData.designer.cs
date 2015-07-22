@@ -54,6 +54,9 @@ namespace sekaiav.Models
     partial void Insertt_video(t_video instance);
     partial void Updatet_video(t_video instance);
     partial void Deletet_video(t_video instance);
+    partial void Insertt_log(t_log instance);
+    partial void Updatet_log(t_log instance);
+    partial void Deletet_log(t_log instance);
     #endregion
 		
 		public SekaiAVDataDataContext() : 
@@ -155,6 +158,14 @@ namespace sekaiav.Models
 			get
 			{
 				return this.GetTable<t_video>();
+			}
+		}
+		
+		public System.Data.Linq.Table<t_log> t_log
+		{
+			get
+			{
+				return this.GetTable<t_log>();
 			}
 		}
 	}
@@ -1575,6 +1586,212 @@ namespace sekaiav.Models
 					this._f_version = value;
 					this.SendPropertyChanged("f_version");
 					this.Onf_versionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_log")]
+	public partial class t_log : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _f_version;
+		
+		private string _f_msg;
+		
+		private System.DateTime _f_datetime;
+		
+		private int _f_level;
+		
+		private int _f_id;
+		
+		private string _f_action;
+		
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onf_versionChanging(string value);
+    partial void Onf_versionChanged();
+    partial void Onf_msgChanging(string value);
+    partial void Onf_msgChanged();
+    partial void Onf_datetimeChanging(System.DateTime value);
+    partial void Onf_datetimeChanged();
+    partial void Onf_levelChanging(int value);
+    partial void Onf_levelChanged();
+    partial void Onf_idChanging(int value);
+    partial void Onf_idChanged();
+    partial void Onf_actionChanging(string value);
+    partial void Onf_actionChanged();
+    #endregion
+		
+		public t_log()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_version", DbType="NChar(32) NOT NULL", CanBeNull=false)]
+		public string f_version
+		{
+			get
+			{
+				return this._f_version;
+			}
+			set
+			{
+				if ((this._f_version != value))
+				{
+					this.Onf_versionChanging(value);
+					this.SendPropertyChanging();
+					this._f_version = value;
+					this.SendPropertyChanged("f_version");
+					this.Onf_versionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_msg", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string f_msg
+		{
+			get
+			{
+				return this._f_msg;
+			}
+			set
+			{
+				if ((this._f_msg != value))
+				{
+					this.Onf_msgChanging(value);
+					this.SendPropertyChanging();
+					this._f_msg = value;
+					this.SendPropertyChanged("f_msg");
+					this.Onf_msgChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_datetime", DbType="DateTime NOT NULL")]
+		public System.DateTime f_datetime
+		{
+			get
+			{
+				return this._f_datetime;
+			}
+			set
+			{
+				if ((this._f_datetime != value))
+				{
+					this.Onf_datetimeChanging(value);
+					this.SendPropertyChanging();
+					this._f_datetime = value;
+					this.SendPropertyChanged("f_datetime");
+					this.Onf_datetimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_level", DbType="Int NOT NULL")]
+		public int f_level
+		{
+			get
+			{
+				return this._f_level;
+			}
+			set
+			{
+				if ((this._f_level != value))
+				{
+					this.Onf_levelChanging(value);
+					this.SendPropertyChanging();
+					this._f_level = value;
+					this.SendPropertyChanged("f_level");
+					this.Onf_levelChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_id", DbType="Int NOT NULL")]
+		public int f_id
+		{
+			get
+			{
+				return this._f_id;
+			}
+			set
+			{
+				if ((this._f_id != value))
+				{
+					this.Onf_idChanging(value);
+					this.SendPropertyChanging();
+					this._f_id = value;
+					this.SendPropertyChanged("f_id");
+					this.Onf_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_action", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string f_action
+		{
+			get
+			{
+				return this._f_action;
+			}
+			set
+			{
+				if ((this._f_action != value))
+				{
+					this.Onf_actionChanging(value);
+					this.SendPropertyChanging();
+					this._f_action = value;
+					this.SendPropertyChanged("f_action");
+					this.Onf_actionChanged();
 				}
 			}
 		}

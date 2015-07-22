@@ -53,33 +53,41 @@ namespace sekaiav
             while (true)
             {
                 var act = Actress.GetActressNotVersion(version, true, fixture);
-                if (act == null)
+                try
                 {
-                    break;
-                }
-                int page = 1;
-                while (page < 100)
-                {
-                    string url = string.Format(Config.Actress_video_list_URL, act.JL_Id, page);
-                    HttpHandler hdler = new HttpHandler();
-                    string response = hdler.WebRequest(HttpMethd.GET, url, null);
-                    Video[] vs = Video.GetVideoFromHtml(response);
-                    if (vs.Length > 0)
-                    {
-                        foreach (var v in vs)
-                        {
-                            v.Save(version, act.Id);
-                        }
-                    }
-                    else
+                    if (act == null)
                     {
                         break;
                     }
-                    page++;
+                    int page = 1;
+                    while (page < 100)
+                    {
+                        string url = string.Format(Config.Actress_video_list_URL, act.JL_Id, page);
+                        HttpHandler hdler = new HttpHandler();
+                        string response = hdler.WebRequest(HttpMethd.GET, url, null);
+                        Video[] vs = Video.GetVideoFromHtml(response);
+                        if (vs.Length > 0)
+                        {
+                            foreach (var v in vs)
+                            {
+                                v.Save(version, act.Id);
+                            }
+                        }
+                        else
+                        {
+                            break;
+                        }
+                        page++;
+                    }
+                    Info("id:" + act.Id + "收录完成", version, act.Id, "video");
                 }
-                Info("id:" + act.Id + "收录完成");
+                catch (System.Exception ex)
+                {
+                    LogHandler.Log(LogLevel.Error, version, "id:" + act.Id + "收录失败:" + ex.Message, act.Id, "video");
+                }
+                
             }
-            Info("抓取完成");
+            Info("抓取完成", version, -1, "video");
         }
     }
 }

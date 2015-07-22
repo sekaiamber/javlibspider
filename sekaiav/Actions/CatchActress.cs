@@ -52,7 +52,7 @@ namespace sekaiav
                             act.Prefix = prefix;
                             act.Save(version);
                         }
-                        Info(prefix + "开头女优第" + page + "页收录" + acts.Length + "个");
+                        Info(prefix + "开头女优第" + page + "页收录" + acts.Length + "个", version, -1, "actress");
                     }
                     else
                     {

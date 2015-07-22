@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using sekaiav.Utils;
 
 namespace sekaiav
 {
@@ -24,11 +25,12 @@ namespace sekaiav
             InitializeComponent();
         }
 
-        void Info(string msg)
+        void Info(string msg, string version, int id, string action)
         {
             this.Dispatcher.Invoke(new Action(delegate
             {
                 this.tb_msg.Text += msg + "\r\n";
+                LogHandler.Log(LogLevel.Info, version, msg, id, action);
             }));
         }
     }

@@ -39,6 +39,9 @@ namespace sekaiav.Models
     partial void Insertt_issuer_video(t_issuer_video instance);
     partial void Updatet_issuer_video(t_issuer_video instance);
     partial void Deletet_issuer_video(t_issuer_video instance);
+    partial void Insertt_log(t_log instance);
+    partial void Updatet_log(t_log instance);
+    partial void Deletet_log(t_log instance);
     partial void Insertt_actress(t_actress instance);
     partial void Updatet_actress(t_actress instance);
     partial void Deletet_actress(t_actress instance);
@@ -54,9 +57,6 @@ namespace sekaiav.Models
     partial void Insertt_video(t_video instance);
     partial void Updatet_video(t_video instance);
     partial void Deletet_video(t_video instance);
-    partial void Insertt_log(t_log instance);
-    partial void Updatet_log(t_log instance);
-    partial void Deletet_log(t_log instance);
     #endregion
 		
 		public SekaiAVDataDataContext() : 
@@ -113,11 +113,11 @@ namespace sekaiav.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<v_video> v_video
+		public System.Data.Linq.Table<t_log> t_log
 		{
 			get
 			{
-				return this.GetTable<v_video>();
+				return this.GetTable<t_log>();
 			}
 		}
 		
@@ -161,11 +161,11 @@ namespace sekaiav.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<t_log> t_log
+		public System.Data.Linq.Table<v_video> v_video
 		{
 			get
 			{
-				return this.GetTable<t_log>();
+				return this.GetTable<v_video>();
 			}
 		}
 	}
@@ -428,47 +428,52 @@ namespace sekaiav.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_video")]
-	public partial class v_video
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_log")]
+	public partial class t_log : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _id;
 		
-		private string _f_javlib_id;
+		private string _f_version;
 		
-		private double _f_length;
+		private string _f_msg;
 		
-		private System.DateTime _f_issuer_date;
+		private System.DateTime _f_datetime;
 		
-		private string _f_code;
+		private int _f_level;
 		
-		private string _f_name;
+		private int _f_id;
 		
-		private System.DateTime _f_update;
+		private string _f_action;
 		
-		private string _f_director_name;
+    #region 可扩展性方法定义
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onf_versionChanging(string value);
+    partial void Onf_versionChanged();
+    partial void Onf_msgChanging(string value);
+    partial void Onf_msgChanged();
+    partial void Onf_datetimeChanging(System.DateTime value);
+    partial void Onf_datetimeChanged();
+    partial void Onf_levelChanging(int value);
+    partial void Onf_levelChanged();
+    partial void Onf_idChanging(int value);
+    partial void Onf_idChanged();
+    partial void Onf_actionChanging(string value);
+    partial void Onf_actionChanged();
+    #endregion
 		
-		private string _f_issuer_name;
-		
-		private System.Nullable<int> _f_director_id;
-		
-		private string _f_director_javlib_id;
-		
-		private int _f_issuer_id;
-		
-		private string _f_issuer_javlib_id;
-		
-		private int _f_factory_id;
-		
-		private string _f_factory_javlib_id;
-		
-		private string _f_factory_name;
-		
-		public v_video()
+		public t_log()
 		{
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -479,248 +484,152 @@ namespace sekaiav.Models
 			{
 				if ((this._id != value))
 				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
 					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_javlib_id", DbType="NChar(20) NOT NULL", CanBeNull=false)]
-		public string f_javlib_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_version", DbType="NChar(32) NOT NULL", CanBeNull=false)]
+		public string f_version
 		{
 			get
 			{
-				return this._f_javlib_id;
+				return this._f_version;
 			}
 			set
 			{
-				if ((this._f_javlib_id != value))
+				if ((this._f_version != value))
 				{
-					this._f_javlib_id = value;
+					this.Onf_versionChanging(value);
+					this.SendPropertyChanging();
+					this._f_version = value;
+					this.SendPropertyChanged("f_version");
+					this.Onf_versionChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_length", DbType="Float NOT NULL")]
-		public double f_length
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_msg", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string f_msg
 		{
 			get
 			{
-				return this._f_length;
+				return this._f_msg;
 			}
 			set
 			{
-				if ((this._f_length != value))
+				if ((this._f_msg != value))
 				{
-					this._f_length = value;
+					this.Onf_msgChanging(value);
+					this.SendPropertyChanging();
+					this._f_msg = value;
+					this.SendPropertyChanged("f_msg");
+					this.Onf_msgChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_issuer_date", DbType="Date NOT NULL")]
-		public System.DateTime f_issuer_date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_datetime", DbType="DateTime NOT NULL")]
+		public System.DateTime f_datetime
 		{
 			get
 			{
-				return this._f_issuer_date;
+				return this._f_datetime;
 			}
 			set
 			{
-				if ((this._f_issuer_date != value))
+				if ((this._f_datetime != value))
 				{
-					this._f_issuer_date = value;
+					this.Onf_datetimeChanging(value);
+					this.SendPropertyChanging();
+					this._f_datetime = value;
+					this.SendPropertyChanged("f_datetime");
+					this.Onf_datetimeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_code", DbType="NChar(20) NOT NULL", CanBeNull=false)]
-		public string f_code
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_level", DbType="Int NOT NULL")]
+		public int f_level
 		{
 			get
 			{
-				return this._f_code;
+				return this._f_level;
 			}
 			set
 			{
-				if ((this._f_code != value))
+				if ((this._f_level != value))
 				{
-					this._f_code = value;
+					this.Onf_levelChanging(value);
+					this.SendPropertyChanging();
+					this._f_level = value;
+					this.SendPropertyChanged("f_level");
+					this.Onf_levelChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_name", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
-		public string f_name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_id", DbType="Int NOT NULL")]
+		public int f_id
 		{
 			get
 			{
-				return this._f_name;
+				return this._f_id;
 			}
 			set
 			{
-				if ((this._f_name != value))
+				if ((this._f_id != value))
 				{
-					this._f_name = value;
+					this.Onf_idChanging(value);
+					this.SendPropertyChanging();
+					this._f_id = value;
+					this.SendPropertyChanged("f_id");
+					this.Onf_idChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_update", DbType="DateTime NOT NULL")]
-		public System.DateTime f_update
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_action", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
+		public string f_action
 		{
 			get
 			{
-				return this._f_update;
+				return this._f_action;
 			}
 			set
 			{
-				if ((this._f_update != value))
+				if ((this._f_action != value))
 				{
-					this._f_update = value;
+					this.Onf_actionChanging(value);
+					this.SendPropertyChanging();
+					this._f_action = value;
+					this.SendPropertyChanged("f_action");
+					this.Onf_actionChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_director_name", DbType="NVarChar(50)")]
-		public string f_director_name
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
 		{
-			get
+			if ((this.PropertyChanging != null))
 			{
-				return this._f_director_name;
-			}
-			set
-			{
-				if ((this._f_director_name != value))
-				{
-					this._f_director_name = value;
-				}
+				this.PropertyChanging(this, emptyChangingEventArgs);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_issuer_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string f_issuer_name
+		protected virtual void SendPropertyChanged(String propertyName)
 		{
-			get
+			if ((this.PropertyChanged != null))
 			{
-				return this._f_issuer_name;
-			}
-			set
-			{
-				if ((this._f_issuer_name != value))
-				{
-					this._f_issuer_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_director_id", DbType="Int")]
-		public System.Nullable<int> f_director_id
-		{
-			get
-			{
-				return this._f_director_id;
-			}
-			set
-			{
-				if ((this._f_director_id != value))
-				{
-					this._f_director_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_director_javlib_id", DbType="NChar(10)")]
-		public string f_director_javlib_id
-		{
-			get
-			{
-				return this._f_director_javlib_id;
-			}
-			set
-			{
-				if ((this._f_director_javlib_id != value))
-				{
-					this._f_director_javlib_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_issuer_id", DbType="Int NOT NULL")]
-		public int f_issuer_id
-		{
-			get
-			{
-				return this._f_issuer_id;
-			}
-			set
-			{
-				if ((this._f_issuer_id != value))
-				{
-					this._f_issuer_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_issuer_javlib_id", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string f_issuer_javlib_id
-		{
-			get
-			{
-				return this._f_issuer_javlib_id;
-			}
-			set
-			{
-				if ((this._f_issuer_javlib_id != value))
-				{
-					this._f_issuer_javlib_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_factory_id", DbType="Int NOT NULL")]
-		public int f_factory_id
-		{
-			get
-			{
-				return this._f_factory_id;
-			}
-			set
-			{
-				if ((this._f_factory_id != value))
-				{
-					this._f_factory_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_factory_javlib_id", DbType="NChar(10) NOT NULL", CanBeNull=false)]
-		public string f_factory_javlib_id
-		{
-			get
-			{
-				return this._f_factory_javlib_id;
-			}
-			set
-			{
-				if ((this._f_factory_javlib_id != value))
-				{
-					this._f_factory_javlib_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_factory_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string f_factory_name
-		{
-			get
-			{
-				return this._f_factory_name;
-			}
-			set
-			{
-				if ((this._f_factory_name != value))
-				{
-					this._f_factory_name = value;
-				}
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -743,6 +652,8 @@ namespace sekaiav.Models
 		
 		private string _f_version;
 		
+		private System.DateTime _f_create;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -759,6 +670,8 @@ namespace sekaiav.Models
     partial void Onf_prefixChanged();
     partial void Onf_versionChanging(string value);
     partial void Onf_versionChanged();
+    partial void Onf_createChanging(System.DateTime value);
+    partial void Onf_createChanged();
     #endregion
 		
 		public t_actress()
@@ -886,6 +799,26 @@ namespace sekaiav.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_create", DbType="DateTime NOT NULL")]
+		public System.DateTime f_create
+		{
+			get
+			{
+				return this._f_create;
+			}
+			set
+			{
+				if ((this._f_create != value))
+				{
+					this.Onf_createChanging(value);
+					this.SendPropertyChanging();
+					this._f_create = value;
+					this.SendPropertyChanged("f_create");
+					this.Onf_createChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -921,6 +854,8 @@ namespace sekaiav.Models
 		
 		private System.DateTime _f_update;
 		
+		private System.DateTime _f_create;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -933,6 +868,8 @@ namespace sekaiav.Models
     partial void Onf_nameChanged();
     partial void Onf_updateChanging(System.DateTime value);
     partial void Onf_updateChanged();
+    partial void Onf_createChanging(System.DateTime value);
+    partial void Onf_createChanged();
     #endregion
 		
 		public t_director()
@@ -1020,6 +957,26 @@ namespace sekaiav.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_create", DbType="DateTime NOT NULL")]
+		public System.DateTime f_create
+		{
+			get
+			{
+				return this._f_create;
+			}
+			set
+			{
+				if ((this._f_create != value))
+				{
+					this.Onf_createChanging(value);
+					this.SendPropertyChanging();
+					this._f_create = value;
+					this.SendPropertyChanged("f_create");
+					this.Onf_createChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1055,6 +1012,8 @@ namespace sekaiav.Models
 		
 		private System.DateTime _f_update;
 		
+		private System.DateTime _f_create;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1067,6 +1026,8 @@ namespace sekaiav.Models
     partial void Onf_nameChanged();
     partial void Onf_updateChanging(System.DateTime value);
     partial void Onf_updateChanged();
+    partial void Onf_createChanging(System.DateTime value);
+    partial void Onf_createChanged();
     #endregion
 		
 		public t_factory()
@@ -1154,6 +1115,26 @@ namespace sekaiav.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_create", DbType="DateTime NOT NULL")]
+		public System.DateTime f_create
+		{
+			get
+			{
+				return this._f_create;
+			}
+			set
+			{
+				if ((this._f_create != value))
+				{
+					this.Onf_createChanging(value);
+					this.SendPropertyChanging();
+					this._f_create = value;
+					this.SendPropertyChanged("f_create");
+					this.Onf_createChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1189,6 +1170,8 @@ namespace sekaiav.Models
 		
 		private System.DateTime _f_update;
 		
+		private System.DateTime _f_create;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1201,6 +1184,8 @@ namespace sekaiav.Models
     partial void Onf_nameChanged();
     partial void Onf_updateChanging(System.DateTime value);
     partial void Onf_updateChanged();
+    partial void Onf_createChanging(System.DateTime value);
+    partial void Onf_createChanged();
     #endregion
 		
 		public t_issuer()
@@ -1288,6 +1273,26 @@ namespace sekaiav.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_create", DbType="DateTime NOT NULL")]
+		public System.DateTime f_create
+		{
+			get
+			{
+				return this._f_create;
+			}
+			set
+			{
+				if ((this._f_create != value))
+				{
+					this.Onf_createChanging(value);
+					this.SendPropertyChanging();
+					this._f_create = value;
+					this.SendPropertyChanged("f_create");
+					this.Onf_createChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1337,6 +1342,8 @@ namespace sekaiav.Models
 		
 		private string _f_version;
 		
+		private System.DateTime _f_create;
+		
     #region 可扩展性方法定义
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1363,6 +1370,8 @@ namespace sekaiav.Models
     partial void Onf_updateChanged();
     partial void Onf_versionChanging(string value);
     partial void Onf_versionChanged();
+    partial void Onf_createChanging(System.DateTime value);
+    partial void Onf_createChanged();
     #endregion
 		
 		public t_video()
@@ -1590,6 +1599,26 @@ namespace sekaiav.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_create", DbType="DateTime NOT NULL")]
+		public System.DateTime f_create
+		{
+			get
+			{
+				return this._f_create;
+			}
+			set
+			{
+				if ((this._f_create != value))
+				{
+					this.Onf_createChanging(value);
+					this.SendPropertyChanging();
+					this._f_create = value;
+					this.SendPropertyChanged("f_create");
+					this.Onf_createChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1611,52 +1640,51 @@ namespace sekaiav.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.t_log")]
-	public partial class t_log : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.v_video")]
+	public partial class v_video
 	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _id;
 		
+		private string _f_javlib_id;
+		
+		private double _f_length;
+		
+		private System.DateTime _f_issuer_date;
+		
+		private string _f_code;
+		
+		private string _f_name;
+		
+		private System.DateTime _f_update;
+		
+		private string _f_director_name;
+		
+		private string _f_issuer_name;
+		
+		private System.Nullable<int> _f_director_id;
+		
+		private string _f_director_javlib_id;
+		
+		private int _f_issuer_id;
+		
+		private string _f_issuer_javlib_id;
+		
+		private int _f_factory_id;
+		
+		private string _f_factory_javlib_id;
+		
+		private string _f_factory_name;
+		
+		private System.DateTime _f_create;
+		
 		private string _f_version;
 		
-		private string _f_msg;
-		
-		private System.DateTime _f_datetime;
-		
-		private int _f_level;
-		
-		private int _f_id;
-		
-		private string _f_action;
-		
-    #region 可扩展性方法定义
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void Onf_versionChanging(string value);
-    partial void Onf_versionChanged();
-    partial void Onf_msgChanging(string value);
-    partial void Onf_msgChanged();
-    partial void Onf_datetimeChanging(System.DateTime value);
-    partial void Onf_datetimeChanged();
-    partial void Onf_levelChanging(int value);
-    partial void Onf_levelChanged();
-    partial void Onf_idChanging(int value);
-    partial void Onf_idChanged();
-    partial void Onf_actionChanging(string value);
-    partial void Onf_actionChanged();
-    #endregion
-		
-		public t_log()
+		public v_video()
 		{
-			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
 		public int id
 		{
 			get
@@ -1667,11 +1695,263 @@ namespace sekaiav.Models
 			{
 				if ((this._id != value))
 				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
 					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_javlib_id", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string f_javlib_id
+		{
+			get
+			{
+				return this._f_javlib_id;
+			}
+			set
+			{
+				if ((this._f_javlib_id != value))
+				{
+					this._f_javlib_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_length", DbType="Float NOT NULL")]
+		public double f_length
+		{
+			get
+			{
+				return this._f_length;
+			}
+			set
+			{
+				if ((this._f_length != value))
+				{
+					this._f_length = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_issuer_date", DbType="Date NOT NULL")]
+		public System.DateTime f_issuer_date
+		{
+			get
+			{
+				return this._f_issuer_date;
+			}
+			set
+			{
+				if ((this._f_issuer_date != value))
+				{
+					this._f_issuer_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_code", DbType="NChar(20) NOT NULL", CanBeNull=false)]
+		public string f_code
+		{
+			get
+			{
+				return this._f_code;
+			}
+			set
+			{
+				if ((this._f_code != value))
+				{
+					this._f_code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_name", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string f_name
+		{
+			get
+			{
+				return this._f_name;
+			}
+			set
+			{
+				if ((this._f_name != value))
+				{
+					this._f_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_update", DbType="DateTime NOT NULL")]
+		public System.DateTime f_update
+		{
+			get
+			{
+				return this._f_update;
+			}
+			set
+			{
+				if ((this._f_update != value))
+				{
+					this._f_update = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_director_name", DbType="NVarChar(50)")]
+		public string f_director_name
+		{
+			get
+			{
+				return this._f_director_name;
+			}
+			set
+			{
+				if ((this._f_director_name != value))
+				{
+					this._f_director_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_issuer_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string f_issuer_name
+		{
+			get
+			{
+				return this._f_issuer_name;
+			}
+			set
+			{
+				if ((this._f_issuer_name != value))
+				{
+					this._f_issuer_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_director_id", DbType="Int")]
+		public System.Nullable<int> f_director_id
+		{
+			get
+			{
+				return this._f_director_id;
+			}
+			set
+			{
+				if ((this._f_director_id != value))
+				{
+					this._f_director_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_director_javlib_id", DbType="NVarChar(20)")]
+		public string f_director_javlib_id
+		{
+			get
+			{
+				return this._f_director_javlib_id;
+			}
+			set
+			{
+				if ((this._f_director_javlib_id != value))
+				{
+					this._f_director_javlib_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_issuer_id", DbType="Int NOT NULL")]
+		public int f_issuer_id
+		{
+			get
+			{
+				return this._f_issuer_id;
+			}
+			set
+			{
+				if ((this._f_issuer_id != value))
+				{
+					this._f_issuer_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_issuer_javlib_id", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string f_issuer_javlib_id
+		{
+			get
+			{
+				return this._f_issuer_javlib_id;
+			}
+			set
+			{
+				if ((this._f_issuer_javlib_id != value))
+				{
+					this._f_issuer_javlib_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_factory_id", DbType="Int NOT NULL")]
+		public int f_factory_id
+		{
+			get
+			{
+				return this._f_factory_id;
+			}
+			set
+			{
+				if ((this._f_factory_id != value))
+				{
+					this._f_factory_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_factory_javlib_id", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string f_factory_javlib_id
+		{
+			get
+			{
+				return this._f_factory_javlib_id;
+			}
+			set
+			{
+				if ((this._f_factory_javlib_id != value))
+				{
+					this._f_factory_javlib_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_factory_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string f_factory_name
+		{
+			get
+			{
+				return this._f_factory_name;
+			}
+			set
+			{
+				if ((this._f_factory_name != value))
+				{
+					this._f_factory_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_create", DbType="DateTime NOT NULL")]
+		public System.DateTime f_create
+		{
+			get
+			{
+				return this._f_create;
+			}
+			set
+			{
+				if ((this._f_create != value))
+				{
+					this._f_create = value;
 				}
 			}
 		}
@@ -1687,132 +1967,8 @@ namespace sekaiav.Models
 			{
 				if ((this._f_version != value))
 				{
-					this.Onf_versionChanging(value);
-					this.SendPropertyChanging();
 					this._f_version = value;
-					this.SendPropertyChanged("f_version");
-					this.Onf_versionChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_msg", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
-		public string f_msg
-		{
-			get
-			{
-				return this._f_msg;
-			}
-			set
-			{
-				if ((this._f_msg != value))
-				{
-					this.Onf_msgChanging(value);
-					this.SendPropertyChanging();
-					this._f_msg = value;
-					this.SendPropertyChanged("f_msg");
-					this.Onf_msgChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_datetime", DbType="DateTime NOT NULL")]
-		public System.DateTime f_datetime
-		{
-			get
-			{
-				return this._f_datetime;
-			}
-			set
-			{
-				if ((this._f_datetime != value))
-				{
-					this.Onf_datetimeChanging(value);
-					this.SendPropertyChanging();
-					this._f_datetime = value;
-					this.SendPropertyChanged("f_datetime");
-					this.Onf_datetimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_level", DbType="Int NOT NULL")]
-		public int f_level
-		{
-			get
-			{
-				return this._f_level;
-			}
-			set
-			{
-				if ((this._f_level != value))
-				{
-					this.Onf_levelChanging(value);
-					this.SendPropertyChanging();
-					this._f_level = value;
-					this.SendPropertyChanged("f_level");
-					this.Onf_levelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_id", DbType="Int NOT NULL")]
-		public int f_id
-		{
-			get
-			{
-				return this._f_id;
-			}
-			set
-			{
-				if ((this._f_id != value))
-				{
-					this.Onf_idChanging(value);
-					this.SendPropertyChanging();
-					this._f_id = value;
-					this.SendPropertyChanged("f_id");
-					this.Onf_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_f_action", DbType="NVarChar(10) NOT NULL", CanBeNull=false)]
-		public string f_action
-		{
-			get
-			{
-				return this._f_action;
-			}
-			set
-			{
-				if ((this._f_action != value))
-				{
-					this.Onf_actionChanging(value);
-					this.SendPropertyChanging();
-					this._f_action = value;
-					this.SendPropertyChanged("f_action");
-					this.Onf_actionChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}

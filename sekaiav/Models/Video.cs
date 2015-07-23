@@ -68,10 +68,12 @@ namespace sekaiav.Models
                         f_length = this.Length,
                         f_name = this.Name,
                         f_update = DateTime.Now,
-                        f_version = version
+                        f_version = version,
+                        f_create = DateTime.Now
                     };
                     if (this.Factory != null)
                     {
+                        // TODO Factory.Save()
                         entry.f_factory = this.Factory.Id;
                     }
                     else
@@ -80,6 +82,7 @@ namespace sekaiav.Models
                     }
                     if (this.Issuer != null)
                     {
+                        // TODO Issuer.Save()
                         entry.f_issuer = this.Issuer.Id;
                     }
                     else
@@ -88,6 +91,7 @@ namespace sekaiav.Models
                     }
                     if (this.Director != null)
                     {
+                        // TODO Director.Save()
                         entry.f_director = this.Director.Id;
                     }
                     else
@@ -123,6 +127,7 @@ namespace sekaiav.Models
                     entry.f_version = version;
                     if (this.Factory != null)
                     {
+                        // TODO Factory.Save()
                         entry.f_factory = this.Factory.Id;
                     }
                     else
@@ -131,6 +136,7 @@ namespace sekaiav.Models
                     }
                     if (this.Issuer != null)
                     {
+                        // TODO Issuer.Save()
                         entry.f_issuer = this.Issuer.Id;
                     }
                     else
@@ -139,6 +145,7 @@ namespace sekaiav.Models
                     }
                     if (this.Director != null)
                     {
+                        // TODO Director.Save()
                         entry.f_director = this.Director.Id;
                     }
                     else

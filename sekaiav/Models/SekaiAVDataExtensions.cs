@@ -17,7 +17,8 @@ namespace sekaiav.Models
                 Name = entry.f_name,
                 Update = entry.f_update,
                 Prefix = entry.f_prefix,
-                Version = entry.f_version
+                Version = entry.f_version,
+                Create = entry.f_create
             };
         }
 
@@ -28,7 +29,8 @@ namespace sekaiav.Models
                 Id = entry.id,
                 JL_Id = entry.f_javlib_id,
                 Name = entry.f_name,
-                Update = entry.f_update
+                Update = entry.f_update,
+                Create = entry.f_create
             };
         }
 
@@ -39,7 +41,8 @@ namespace sekaiav.Models
                 Id = entry.id,
                 JL_Id = entry.f_javlib_id,
                 Name = entry.f_name,
-                Update = entry.f_update
+                Update = entry.f_update,
+                Create = entry.f_create
             };
         }
 
@@ -50,7 +53,8 @@ namespace sekaiav.Models
                 Id = entry.id,
                 JL_Id = entry.f_javlib_id,
                 Name = entry.f_name,
-                Update = entry.f_update
+                Update = entry.f_update,
+                Create = entry.f_create
             };
         }
 
@@ -64,7 +68,9 @@ namespace sekaiav.Models
                 JL_Id = entry.f_javlib_id,
                 Length = entry.f_length,
                 Name = entry.f_name,
-                Update = entry.f_update
+                Update = entry.f_update,
+                Create = entry.f_create,
+                Version = entry.f_version
             };
             if (entry.f_director_id.HasValue)
             {

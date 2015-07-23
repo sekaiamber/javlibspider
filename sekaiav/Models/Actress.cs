@@ -39,12 +39,12 @@ namespace sekaiav.Models
             return ret.ToArray();
         }
 
-        public static Actress GetActressNotVersion(string version, bool overwrite, string[] fixture)
+        public static Actress GetActressNotVersion(string version, bool overwrite, int thcount, int thindex)
         {
             using (SekaiAVDataDataContext db = new SekaiAVDataDataContext())
             {
                 var ret = (from m in db.t_actress
-                           where m.f_version != version && fixture.Contains(m.f_prefix)
+                           where m.f_version != version && m.id % thcount == thindex
                            select m).FirstOrDefault();
                 if (ret == null)
                 {
@@ -55,6 +55,7 @@ namespace sekaiav.Models
                     if (overwrite)
                     {
                         ret.f_version = version;
+                        ret.f_update = DateTime.Now;
                         db.SubmitChanges();
                     }
                     return ret.GetModel();
@@ -77,7 +78,8 @@ namespace sekaiav.Models
                         f_javlib_id = this.JL_Id,
                         f_name = this.Name,
                         f_update = DateTime.Now,
-                        f_version = version
+                        f_version = version,
+                        f_create = DateTime.Now
                     };
                     db.t_actress.InsertOnSubmit(entry);
                     db.SubmitChanges();

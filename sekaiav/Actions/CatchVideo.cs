@@ -25,34 +25,25 @@ namespace sekaiav
         private void bt_catch_video_Click(object sender, RoutedEventArgs e)
         {
             string vers = Guid.NewGuid().ToString("N");
-            string[][] fixtures = new string[][] 
-            {
-                new string[] {"z", "p", "v", "l", "b", "d", "g", "c", "j", "r", "e", "w", "u", "f" },
-                new string[] {"o", "h"},
-                new string[] {"i", "t"},
-                new string[] {"y", "n"},
-                new string[] {"a"},
-                new string[] {"m"},
-                new string[] {"s"},
-                new string[] {"k"}
-            };
-            for (int i = 0; i < fixtures.Length; i++)
+            // string vers = "32d80c66060747c0a4dcbb4b27d916f9";
+            int thcount = 8;
+            for (int i = 0; i < thcount; i++)
             {
                 Thread th = new Thread(new ParameterizedThreadStart(delegate(object s)
                 {
-                    var fixture = s as string[];
-                    CatchVideo(vers, fixture);
+                    int thindex = (int)s;
+                    CatchVideo(vers, thcount, thindex);
                 }));
                 this.bt_catch_actress.IsEnabled = false;
-                th.Start(fixtures[i]);
+                th.Start(i);
             }
         }
 
-        void CatchVideo(string version, string[] fixture)
+        void CatchVideo(string version, int thcount, int thindex)
         {
             while (true)
             {
-                var act = Actress.GetActressNotVersion(version, true, fixture);
+                var act = Actress.GetActressNotVersion(version, true, thcount, thindex);
                 try
                 {
                     if (act == null)

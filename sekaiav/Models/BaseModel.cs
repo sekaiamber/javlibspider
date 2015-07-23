@@ -11,5 +11,6 @@ namespace sekaiav.Models
         public string JL_Id { get; set; }
         public DateTime Update { get; set; }
         public string Version { get; set; }
+        public DateTime Create { get; set; }
     }
 }

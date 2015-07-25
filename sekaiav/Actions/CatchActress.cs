@@ -29,6 +29,7 @@ namespace sekaiav
                 CatchActress();
             }));
             this.bt_catch_actress.IsEnabled = false;
+            th.IsBackground = true;
             th.Start();
         }
 

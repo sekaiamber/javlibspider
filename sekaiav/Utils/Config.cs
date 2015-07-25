@@ -7,7 +7,10 @@ namespace sekaiav.Utils
 {
     public class Config
     {
+        public const int ThreadCount = 8;
+
         public const string Actress_URL = "http://www.javlibrary.com/cn/star_list.php?prefix={0}&page={1}";
         public const string Actress_video_list_URL = "http://www.javlibrary.com/cn/vl_star.php?list&mode=2&s={0}&page={1}";
+        public const string Actress_video_detail_URL = "http://www.javlibrary.com/cn/?v={0}";
     }
 }

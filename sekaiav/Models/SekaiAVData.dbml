@@ -67,22 +67,6 @@
       <Column Name="f_create" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.t_video" Member="t_video">
-    <Type Name="t_video">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="f_javlib_id" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="f_director" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="f_length" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="f_issuer_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="f_issuer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="f_code" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="f_name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
-      <Column Name="f_factory" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="f_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="f_version" Type="System.String" DbType="NChar(32) NOT NULL" CanBeNull="false" />
-      <Column Name="f_create" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.v_video" Member="v_video">
     <Type Name="v_video">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -103,6 +87,37 @@
       <Column Name="f_factory_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="f_create" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="f_version" Type="System.String" DbType="NChar(32) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_video" Member="t_video">
+    <Type Name="t_video">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="f_javlib_id" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_director" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="f_length" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="f_issuer_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="f_issuer" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="f_code" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_name" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="f_factory" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="f_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="f_version" Type="System.String" DbType="NChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="f_create" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_tag_video" Member="t_tag_video">
+    <Type Name="t_tag_video">
+      <Column Name="f_video" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="f_tag" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.t_tag" Member="t_tag">
+    <Type Name="t_tag">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="f_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="f_javlib_id" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="f_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="f_create" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

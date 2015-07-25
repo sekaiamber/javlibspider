@@ -58,6 +58,18 @@ namespace sekaiav.Models
             };
         }
 
+        public static VideoTag GetModel(this t_tag entry)
+        {
+            return new VideoTag
+            {
+                Id = entry.id,
+                JL_Id = entry.f_javlib_id,
+                Name = entry.f_name,
+                Update = entry.f_update,
+                Create = entry.f_create
+            };
+        }
+
         public static Video GetModel(this v_video entry)
         {
             Video v = new Video

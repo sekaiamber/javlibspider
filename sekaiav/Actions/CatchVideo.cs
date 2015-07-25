@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.Threading;
 using sekaiav.Utils;
 using sekaiav.Models;
+using sekaiav.Utils;
 
 namespace sekaiav
 {
@@ -25,16 +26,16 @@ namespace sekaiav
         private void bt_catch_video_Click(object sender, RoutedEventArgs e)
         {
             string vers = Guid.NewGuid().ToString("N");
-            // string vers = "32d80c66060747c0a4dcbb4b27d916f9";
-            int thcount = 8;
-            for (int i = 0; i < thcount; i++)
+            // string vers = "33d7da91f49e4c0085b9a130597c90df";
+            for (int i = 0; i < Config.ThreadCount; i++)
             {
                 Thread th = new Thread(new ParameterizedThreadStart(delegate(object s)
                 {
                     int thindex = (int)s;
-                    CatchVideo(vers, thcount, thindex);
+                    CatchVideo(vers, Config.ThreadCount, thindex);
                 }));
                 this.bt_catch_actress.IsEnabled = false;
+                th.IsBackground = true;
                 th.Start(i);
             }
         }
@@ -56,7 +57,7 @@ namespace sekaiav
                         string url = string.Format(Config.Actress_video_list_URL, act.JL_Id, page);
                         HttpHandler hdler = new HttpHandler();
                         string response = hdler.WebRequest(HttpMethd.GET, url, null);
-                        Video[] vs = Video.GetVideoFromHtml(response);
+                        Video[] vs = Video.GetVideoListFromHtml(response);
                         if (vs.Length > 0)
                         {
                             foreach (var v in vs)

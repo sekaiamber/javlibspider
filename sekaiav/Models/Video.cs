@@ -16,8 +16,9 @@ namespace sekaiav.Models
         public DateTime IssueDate { get; set; }
         public Issuer Issuer { get; set; }
         public Factory Factory { get; set; }
+        public VideoTag[] Tags { get; set; }
 
-        public static Video[] GetVideoFromHtml(string html)
+        public static Video[] GetVideoListFromHtml(string html)
         {
             List<Video> ret = new List<Video>();
             RegexOptions regexOptions = RegexOptions.Singleline;
@@ -50,6 +51,196 @@ namespace sekaiav.Models
             return ret.ToArray();
         }
 
+        public static Video GetActressNotVersion(string version, int thcount, int thindex)
+        {
+            using (SekaiAVDataDataContext db = new SekaiAVDataDataContext())
+            {
+                var entry = (from m in db.t_video
+                           where m.f_version != version && m.id % thcount == thindex
+                           select m).FirstOrDefault();
+                if (entry == null)
+                {
+                    return null;
+                }
+                Video ret = new Video
+                {
+                    Id = entry.id,
+                    Code = entry.f_code,
+                    Create = entry.f_create,
+                    IssueDate = entry.f_issuer_date,
+                    JL_Id = entry.f_javlib_id,
+                    Length = entry.f_length,
+                    Name = entry.f_name,
+                    Update = entry.f_update,
+                    Version = entry.f_version,
+                    Factory = null,
+                    Director = null,
+                    Issuer = null,
+                    Tags = new VideoTag[0]
+                };
+                if (entry.f_director > 0)
+                {
+                    var _d = (from m in db.t_director where m.id == entry.f_director select m).FirstOrDefault();
+                    if (_d != null)
+                    {
+                        ret.Director = _d.GetModel();
+                    }
+                }
+                if (entry.f_factory > 0)
+                {
+                    var _d = (from m in db.t_factory where  m.id == entry.f_factory select m).FirstOrDefault();
+                    if (_d != null)
+                    {
+                        ret.Factory = _d.GetModel();
+                    }
+                }
+                if (entry.f_issuer > 0)
+                {
+                    var _d = (from m in db.t_issuer where m.id == entry.f_issuer select m).FirstOrDefault();
+                    if (_d != null)
+                    {
+                        ret.Issuer = _d.GetModel();
+                    }
+                }
+                ret.Tags = (from m in db.t_tag
+                             join n in db.t_tag_video on m.id equals n.f_tag
+                             where n.f_video == ret.Id
+                             select m.GetModel()).ToArray();
+                return ret;
+            }
+        }
+
+        public void UpdateDetailFromHtml(string html)
+        {
+            RegexOptions regexOptions = RegexOptions.Singleline;
+            Regex reg = new Regex("<div id=\"video_info\">.+(?=<!-- end of video_info -->)", regexOptions);
+            var m = reg.Match(html);
+            if (m.Success)
+            {
+                string table = m.Value;
+                // length
+                reg = new Regex("(?<=长度).+(?=<!-- end of video_length -->)", regexOptions);
+                var _m = reg.Match(table);
+                if (_m.Success)
+                {
+                    reg = new Regex("(?<=>)\\d+(?=<)", regexOptions);
+                    _m = reg.Match(_m.Value);
+                    if (_m.Success)
+                    {
+                        this.Length = Int32.Parse(_m.Value);
+                    }
+                }
+                // director
+                reg = new Regex("(?<=导演).+(?=<!-- end of video_director -->)", regexOptions);
+                _m = reg.Match(table);
+                if (_m.Success)
+                {
+                    reg = new Regex("<a .+>.+</a>", regexOptions);
+                    _m = reg.Match(_m.Value);
+                    if (_m.Success)
+                    {
+                        this.Director = new Director();
+                        reg = new Regex("(?<=href=\"vl_director.php\\?d=).+(?=\" rel)", regexOptions);
+                        var _m2 = reg.Match(_m.Value);
+                        if (_m2.Success)
+                        {
+                            this.Director.JL_Id = _m2.Value;
+                        }
+                        reg = new Regex("(?<=>).+(?=</a>)", regexOptions);
+                        _m2 = reg.Match(_m.Value);
+                        if (_m2.Success)
+                        {
+                            this.Director.Name = _m2.Value;
+                        }
+                    }
+                }
+                // factory
+                reg = new Regex("(?<=制作商).+(?=<!-- end of video_maker -->)", regexOptions);
+                _m = reg.Match(table);
+                if (_m.Success)
+                {
+                    reg = new Regex("<a .+>.+</a>", regexOptions);
+                    _m = reg.Match(_m.Value);
+                    if (_m.Success)
+                    {
+                        this.Factory = new Factory();
+                        reg = new Regex("(?<=href=\"vl_maker.php\\?m=).+(?=\" rel)", regexOptions);
+                        var _m2 = reg.Match(_m.Value);
+                        if (_m2.Success)
+                        {
+                            this.Factory.JL_Id = _m2.Value;
+                        }
+                        reg = new Regex("(?<=>).+(?=</a>)", regexOptions);
+                        _m2 = reg.Match(_m.Value);
+                        if (_m2.Success)
+                        {
+                            this.Factory.Name = _m2.Value;
+                        }
+                    }
+                }
+                // issuer
+                reg = new Regex("(?<=发行商).+(?=<!-- end of video_label -->)", regexOptions);
+                _m = reg.Match(table);
+                if (_m.Success)
+                {
+                    reg = new Regex("<a .+>.+</a>", regexOptions);
+                    _m = reg.Match(_m.Value);
+                    if (_m.Success)
+                    {
+                        this.Issuer = new Issuer();
+                        reg = new Regex("(?<=href=\"vl_label.php\\?l=).+(?=\" rel)", regexOptions);
+                        var _m2 = reg.Match(_m.Value);
+                        if (_m2.Success)
+                        {
+                            this.Issuer.JL_Id = _m2.Value;
+                        }
+                        reg = new Regex("(?<=>).+(?=</a>)", regexOptions);
+                        _m2 = reg.Match(_m.Value);
+                        if (_m2.Success)
+                        {
+                            this.Issuer.Name = _m2.Value;
+                        }
+                    }
+                }
+                // tags
+                reg = new Regex("(?<=类别).+(?=<!-- end of video_genres -->)", regexOptions);
+                _m = reg.Match(table);
+                if (_m.Success)
+                {
+                    reg = new Regex("<span.+?/span>", regexOptions);
+                    List<VideoTag> lst = new List<VideoTag>();
+                    foreach (Match _m2 in reg.Matches(_m.Value))
+                    {
+                        reg = new Regex("<a .+>.+</a>", regexOptions);
+                        var _m3 = reg.Match(_m2.Value);
+                        if (_m3.Success)
+                        {
+                            VideoTag _t = new VideoTag();
+                            reg = new Regex("(?<=href=\"vl_genre.php\\?g=).+(?=\" rel)", regexOptions);
+                            var _m4 = reg.Match(_m3.Value);
+                            if (_m4.Success)
+                            {
+                                _t.JL_Id = _m4.Value;
+                            }
+                            reg = new Regex("(?<=>).+(?=</a>)", regexOptions);
+                            _m4 = reg.Match(_m3.Value);
+                            if (_m4.Success)
+                            {
+                                _t.Name = _m4.Value;
+                            }
+                            lst.Add(_t);
+                        }
+                    }
+                    this.Tags = lst.ToArray();
+                }
+            }
+        }
+
+        public bool Save(string version)
+        {
+            return this.Save(version, -1);
+        }
+
         public bool Save(string version, int actress)
         {
             using (SekaiAVDataDataContext db = new SekaiAVDataDataContext())
@@ -73,7 +264,7 @@ namespace sekaiav.Models
                     };
                     if (this.Factory != null)
                     {
-                        // TODO Factory.Save()
+                        this.Factory.Save();
                         entry.f_factory = this.Factory.Id;
                     }
                     else
@@ -82,7 +273,7 @@ namespace sekaiav.Models
                     }
                     if (this.Issuer != null)
                     {
-                        // TODO Issuer.Save()
+                        this.Issuer.Save();
                         entry.f_issuer = this.Issuer.Id;
                     }
                     else
@@ -91,7 +282,7 @@ namespace sekaiav.Models
                     }
                     if (this.Director != null)
                     {
-                        // TODO Director.Save()
+                        this.Director.Save();
                         entry.f_director = this.Director.Id;
                     }
                     else
@@ -100,17 +291,12 @@ namespace sekaiav.Models
                     }
                     db.t_video.InsertOnSubmit(entry);
                     db.SubmitChanges();
-                    var rcount = (from m in db.t_actress_video
-                                  where m.f_actress == actress && m.f_video == entry.id
-                                  select m).Count();
-                    if (rcount == 0)
+                    if (this.Tags != null)
                     {
-                        db.t_actress_video.InsertOnSubmit(new t_actress_video()
+                        foreach (var tag in this.Tags)
                         {
-                            f_actress = actress,
-                            f_video = entry.id
-                        });
-                        db.SubmitChanges();
+                            tag.Save(this.Id);
+                        }
                     }
                 }
                 else
@@ -127,7 +313,7 @@ namespace sekaiav.Models
                     entry.f_version = version;
                     if (this.Factory != null)
                     {
-                        // TODO Factory.Save()
+                        this.Factory.Save();
                         entry.f_factory = this.Factory.Id;
                     }
                     else
@@ -136,7 +322,7 @@ namespace sekaiav.Models
                     }
                     if (this.Issuer != null)
                     {
-                        // TODO Issuer.Save()
+                        this.Issuer.Save();
                         entry.f_issuer = this.Issuer.Id;
                     }
                     else
@@ -145,7 +331,7 @@ namespace sekaiav.Models
                     }
                     if (this.Director != null)
                     {
-                        // TODO Director.Save()
+                        this.Director.Save();
                         entry.f_director = this.Director.Id;
                     }
                     else
@@ -153,6 +339,16 @@ namespace sekaiav.Models
                         entry.f_director = -1;
                     }
                     db.SubmitChanges();
+                    if (this.Tags != null)
+                    {
+                        foreach (var tag in this.Tags)
+                        {
+                            tag.Save(this.Id);
+                        }
+                    }
+                }
+                if (actress > 0)
+                {
                     var rcount = (from m in db.t_actress_video
                                   where m.f_actress == actress && m.f_video == entry.id
                                   select m).Count();

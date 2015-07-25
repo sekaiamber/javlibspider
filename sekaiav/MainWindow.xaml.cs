@@ -29,7 +29,12 @@ namespace sekaiav
         {
             this.Dispatcher.Invoke(new Action(delegate
             {
+                if (this.tb_msg.Text.Count(c => c == '\r') > 200)
+                {
+                    this.tb_msg.Text = "";
+                }
                 this.tb_msg.Text += msg + "\r\n";
+                this.tb_msg.ScrollToEnd();
                 LogHandler.Log(LogLevel.Info, version, msg, id, action);
             }));
         }

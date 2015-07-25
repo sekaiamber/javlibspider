@@ -57,6 +57,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Actions\CatchVideo.cs" />
+    <Compile Include="Actions\CatchVideoInfo.cs" />
+    <Compile Include="Models\VideoTag.cs" />
     <Compile Include="Utils\Config.cs" />
     <Compile Include="Utils\HttpHandler.cs" />
     <Compile Include="Utils\LogHandler.cs" />

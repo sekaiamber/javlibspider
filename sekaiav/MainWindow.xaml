@@ -3,8 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Content="抓取女忧" Height="23" HorizontalAlignment="Left" Margin="20,12,0,0" Name="bt_catch_actress" VerticalAlignment="Top" Width="75" Click="bt_catch_actress_Click" />
+        <Button Content="抓取女忧" Height="23" HorizontalAlignment="Left" Margin="20,12,0,0" Name="bt_catch_actress" VerticalAlignment="Top" Width="75" Click="bt_catch_actress_Click" IsEnabled="False" />
         <TextBox Height="258" HorizontalAlignment="Left" Margin="20,41,0,0" Name="tb_msg" VerticalAlignment="Top" Width="471" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
-        <Button Content="抓取影片" Height="23" HorizontalAlignment="Left" Margin="101,12,0,0" Name="bt_catch_video" VerticalAlignment="Top" Width="75" Click="bt_catch_video_Click" />
+        <Button Content="抓取影片" Height="23" HorizontalAlignment="Left" Margin="101,12,0,0" Name="bt_catch_video" VerticalAlignment="Top" Width="75" Click="bt_catch_video_Click" IsEnabled="False" />
+        <Button Content="抓取影片详情" Height="23" HorizontalAlignment="Left" Margin="182,12,0,0" Name="bt_catch_video_info" VerticalAlignment="Top" Width="93" Click="bt_catch_video_info_Click" />
     </Grid>
 </Window>

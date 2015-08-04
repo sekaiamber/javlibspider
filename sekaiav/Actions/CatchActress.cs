@@ -24,18 +24,26 @@ namespace sekaiav
     {
         private void bt_catch_actress_Click(object sender, RoutedEventArgs e)
         {
+            string vers;
+            if (Config.UseGivenJobVersion)
+            {
+                vers = Config.GivenJobVersion;
+            }
+            else
+            {
+                vers = Guid.NewGuid().ToString("N");
+            }
             Thread th = new Thread(new ThreadStart(delegate
             {
-                CatchActress();
+                CatchActress(vers);
             }));
             this.bt_catch_actress.IsEnabled = false;
             th.IsBackground = true;
             th.Start();
         }
 
-        void CatchActress()
+        void CatchActress(string version)
         {
-            string version = Guid.NewGuid().ToString("N");
             string[] prefixs = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
             int page = 1;
             foreach (var prefix in prefixs)

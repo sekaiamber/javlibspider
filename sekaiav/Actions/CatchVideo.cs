@@ -25,8 +25,15 @@ namespace sekaiav
     {
         private void bt_catch_video_Click(object sender, RoutedEventArgs e)
         {
-            string vers = Guid.NewGuid().ToString("N");
-            // string vers = "33d7da91f49e4c0085b9a130597c90df";
+            string vers;
+            if (Config.UseGivenJobVersion)
+            {
+                vers = Config.GivenJobVersion;
+            }
+            else
+            {
+                vers = Guid.NewGuid().ToString("N");
+            }
             for (int i = 0; i < Config.ThreadCount; i++)
             {
                 Thread th = new Thread(new ParameterizedThreadStart(delegate(object s)
